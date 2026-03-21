@@ -10,13 +10,13 @@ export const metadata: Metadata = {
 
 export default function PosHistoryPage() {
   return (
-    <main className="section">
+    <main className="section" data-testid="page-pos-history">
       <div className="container">
-        <div className="section-head">
+        <div className="section-head" data-testid="pos-history-page-head">
           <h1>Orders History</h1>
           <p>Recent transactions captured from the POS charge workflow.</p>
           <div className="section-actions">
-            <Link className="btn-secondary" href="/pos">
+            <Link className="btn-secondary" data-testid="pos-history-back-to-pos" href="/pos">
               <FaArrowLeftLong aria-hidden />
               Back to POS
             </Link>

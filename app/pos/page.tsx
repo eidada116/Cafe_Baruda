@@ -13,13 +13,13 @@ export default async function PosPage() {
   const { menuItems, categories } = await getCafeData();
 
   return (
-    <main className="section">
+    <main className="section" data-testid="page-pos">
       <div className="container">
-        <div className="section-head">
+        <div className="section-head" data-testid="pos-page-head">
           <h1>POS Terminal</h1>
           <p>This section is separated from the customer-facing pages for internal ordering workflows.</p>
           <div className="section-actions">
-            <Link className="btn-secondary" href="/pos/history">
+            <Link className="btn-secondary" data-testid="pos-link-order-history" href="/pos/history">
               <FaClockRotateLeft aria-hidden />
               View Orders History
             </Link>
