@@ -7,15 +7,18 @@
     "dev": "next dev",
     "build": "next build && node scripts/export-public.mjs",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "jest"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.2",
+    "chromedriver": "^146.0.5",
     "next": "^16.0.0",
     "papaparse": "^5.5.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-icons": "^5.5.0",
+    "selenium-webdriver": "^4.41.0",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
@@ -26,5 +29,14 @@
     "eslint": "^9.25.0",
     "eslint-config-next": "^16.0.0",
     "typescript": "^5.8.3"
-  }
+  },
+  "description": "Production-ready Next.js (App Router) cafe website with data-driven menu rendering from CSV/Excel-compatible sources.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

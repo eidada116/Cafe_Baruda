@@ -2,11 +2,11 @@ import Link from "next/link";
 import { FaMugHot } from "react-icons/fa6";
 
 const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/menu", label: "Menu" },
-  { href: "/pos", label: "POS" },
-  { href: "/#about", label: "About" },
-  { href: "/#contact", label: "Contact" }
+  { href: "/", label: "Home", id: "home-btn" },
+  { href: "/menu", label: "Menu" , id: "menu-btn"},
+  { href: "/pos", label: "POS" , id: "pos-btn"},
+  { href: "/#about", label: "About", id: "about-btn" },
+  { href: "/#contact", label: "Contact", id: "contact-btn" }
 ];
 
 export function SiteHeader() {
@@ -21,7 +21,7 @@ export function SiteHeader() {
           <ul className="nav-list">
             {navItems.map((item) => (
               <li key={item.href}>
-                <Link href={item.href}>{item.label}</Link>
+                <Link href={item.href} id={item.id}>{item.label}</Link>
               </li>
             ))}
           </ul>

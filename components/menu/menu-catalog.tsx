@@ -49,6 +49,7 @@ export function MenuCatalog({ menuItems, categories }: MenuCatalogProps) {
             className={`chip ${activeCategory === "all" ? "active" : ""}`}
             onClick={() => setActiveCategory("all")}
             type="button"
+            id= "all-btn"
           >
             All
           </button>
