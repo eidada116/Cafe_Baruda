@@ -138,12 +138,13 @@ export function PosTerminal({ categories, menuItems }: PosTerminalProps) {
   }
 
   return (
-    <section className="pos-layout">
-      <div className="pos-menu">
-        <div className="pos-toolbar">
-          <div className="pos-chips">
+    <section className="pos-layout" data-testid="pos-terminal">
+      <div className="pos-menu" data-testid="pos-menu-panel">
+        <div className="pos-toolbar" data-testid="pos-toolbar">
+          <div className="pos-chips" data-testid="pos-category-filters" role="group" aria-label="POS menu categories">
             <button
               className={`chip ${activeCategory === "all" ? "active" : ""}`}
+              data-testid="pos-filter-all"
               onClick={() => setActiveCategory("all")}
               type="button"
             >
@@ -152,6 +153,7 @@ export function PosTerminal({ categories, menuItems }: PosTerminalProps) {
             {categories.map((category) => (
               <button
                 className={`chip ${activeCategory === category.label ? "active" : ""}`}
+                data-testid={`pos-filter-${category.id}`}
                 key={category.id}
                 onClick={() => setActiveCategory(category.label)}
                 type="button"
@@ -164,6 +166,9 @@ export function PosTerminal({ categories, menuItems }: PosTerminalProps) {
             <FaMagnifyingGlass aria-hidden />
             <input
               aria-label="Search menu for POS"
+              data-testid="pos-search-input"
+              id="pos-search-input"
+              name="posMenuSearch"
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Search item or SKU"
               type="search"
@@ -172,9 +177,15 @@ export function PosTerminal({ categories, menuItems }: PosTerminalProps) {
           </label>
         </div>
 
-        <div className="pos-item-grid">
+        <div className="pos-item-grid" data-testid="pos-item-grid">
           {filteredItems.map((item) => (
-            <button className="pos-item-card" key={item.id} onClick={() => addToCart(item)} type="button">
+            <button
+              className="pos-item-card"
+              data-testid={`pos-add-item-${item.id}`}
+              key={item.id}
+              onClick={() => addToCart(item)}
+              type="button"
+            >
               <strong>{item.name}</strong>
               <span>
                 {item.category} - {item.size}
@@ -185,25 +196,29 @@ export function PosTerminal({ categories, menuItems }: PosTerminalProps) {
         </div>
       </div>
 
-      <aside className="pos-order">
+      <aside className="pos-order" data-testid="pos-order-panel">
         <header className="pos-order-head">
           <h2>Current Order</h2>
           <FaReceipt aria-hidden />
         </header>
 
-        <div className="pos-order-meta">
-          <label>
+        <div className="pos-order-meta" data-testid="pos-order-meta">
+          <label data-testid="pos-customer-field">
             Customer
             <input
+              data-testid="pos-customer-input"
+              id="pos-customer-input"
+              name="customerName"
               onChange={(event) => setCustomer(event.target.value)}
               placeholder="Walk-in customer"
               type="text"
               value={customer}
             />
           </label>
-          <div className="type-switch" role="tablist" aria-label="Order type">
+          <div className="type-switch" data-testid="pos-order-type-switch" role="tablist" aria-label="Order type">
             <button
               className={orderType === "in" ? "active" : ""}
+              data-testid="pos-order-type-dine-in"
               onClick={() => setOrderType("in")}
               role="tab"
               type="button"
@@ -212,6 +227,7 @@ export function PosTerminal({ categories, menuItems }: PosTerminalProps) {
             </button>
             <button
               className={orderType === "out" ? "active" : ""}
+              data-testid="pos-order-type-takeaway"
               onClick={() => setOrderType("out")}
               role="tab"
               type="button"
@@ -221,12 +237,14 @@ export function PosTerminal({ categories, menuItems }: PosTerminalProps) {
           </div>
         </div>
 
-        <div className="pos-lines">
+        <div className="pos-lines" data-testid="pos-cart-lines">
           {cart.length === 0 ? (
-            <p className="pos-empty">No items selected.</p>
+            <p className="pos-empty" data-testid="pos-cart-empty">
+              No items selected.
+            </p>
           ) : (
             cart.map((line) => (
-              <article className="pos-line" key={line.item.id}>
+              <article className="pos-line" data-testid={`pos-cart-line-${line.item.id}`} key={line.item.id}>
                 <div>
                   <strong>{line.item.name}</strong>
                   <p>
@@ -234,49 +252,69 @@ export function PosTerminal({ categories, menuItems }: PosTerminalProps) {
                   </p>
                 </div>
                 <div className="pos-line-actions">
-                  <button aria-label={`Decrease ${line.item.name}`} onClick={() => changeQty(line.item.id, -1)} type="button">
+                  <button
+                    aria-label={`Decrease ${line.item.name}`}
+                    data-testid={`pos-cart-decrease-${line.item.id}`}
+                    onClick={() => changeQty(line.item.id, -1)}
+                    type="button"
+                  >
                     <FaMinus aria-hidden />
                   </button>
-                  <span>{line.qty}</span>
-                  <button aria-label={`Increase ${line.item.name}`} onClick={() => changeQty(line.item.id, 1)} type="button">
+                  <span data-testid={`pos-cart-qty-${line.item.id}`}>{line.qty}</span>
+                  <button
+                    aria-label={`Increase ${line.item.name}`}
+                    data-testid={`pos-cart-increase-${line.item.id}`}
+                    onClick={() => changeQty(line.item.id, 1)}
+                    type="button"
+                  >
                     <FaPlus aria-hidden />
                   </button>
                 </div>
-                <p>{formatCurrency(line.item.price * line.qty)}</p>
+                <p data-testid={`pos-cart-line-total-${line.item.id}`}>{formatCurrency(line.item.price * line.qty)}</p>
               </article>
             ))
           )}
         </div>
 
-        <div className="pos-totals">
-          <p>
+        <div className="pos-totals" data-testid="pos-totals">
+          <p data-testid="pos-summary-order-type">
             <span>Order type</span>
             <span>{orderType === "in" ? "Dine In" : "Takeaway"}</span>
           </p>
-          <p>
+          <p data-testid="pos-summary-customer">
             <span>Customer</span>
             <span>{customer.trim() || "Guest"}</span>
           </p>
-          <p>
+          <p data-testid="pos-summary-item-count">
             <span>Items</span>
             <span>{itemCount}</span>
           </p>
-          <p className="grand">
+          <p className="grand" data-testid="pos-summary-grand-total">
             <span>Total</span>
             <span>{formatCurrency(subtotal)}</span>
           </p>
         </div>
 
-        <div className="pos-actions">
-          <button className="btn-secondary" onClick={clearOrder} type="button">
+        <div className="pos-actions" data-testid="pos-actions">
+          <button className="btn-secondary" data-testid="pos-clear-order" onClick={clearOrder} type="button">
             <FaTrashCan aria-hidden />
             Clear
           </button>
-          <button className="btn-primary" disabled={cart.length === 0 || isCharging} onClick={chargeOrder} type="button">
+          <button
+            className="btn-primary"
+            data-testid="pos-charge-button"
+            disabled={cart.length === 0 || isCharging}
+            onClick={chargeOrder}
+            type="button"
+          >
             {isCharging ? "Saving..." : "Charge"}
           </button>
         </div>
-        {statusMessage ? <p className="pos-status">{statusMessage}</p> : null}
+        {statusMessage ? (
+          <p className="pos-status" data-testid="pos-status-message" role="status">
+            {statusMessage}
+          </p>
+        ) : null}
       </aside>
     </section>
   );

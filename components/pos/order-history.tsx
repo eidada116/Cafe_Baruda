@@ -47,48 +47,62 @@ export function OrderHistory() {
   }, []);
 
   if (loading) {
-    return <p className="empty-result">Loading orders...</p>;
+    return (
+      <p className="empty-result" data-testid="order-history-loading">
+        Loading orders...
+      </p>
+    );
   }
 
   if (error) {
-    return <p className="empty-result">{error}</p>;
+    return (
+      <p className="empty-result" data-testid="order-history-error" role="alert">
+        {error}
+      </p>
+    );
   }
 
   if (orders.length === 0) {
-    return <p className="empty-result">No orders found yet.</p>;
+    return (
+      <p className="empty-result" data-testid="order-history-empty">
+        No orders found yet.
+      </p>
+    );
   }
 
   return (
-    <div className="order-history-grid">
+    <div className="order-history-grid" data-testid="order-history-list">
       {orders.map((order) => (
-        <article className="order-history-card" key={order.id}>
-          <header>
-            <h2>{order.orderNumber}</h2>
-            <p>{new Date(order.createdAt).toLocaleString("en-PH", { hour12: false })}</p>
+        <article className="order-history-card" data-testid={`order-history-card-${order.id}`} key={order.id}>
+          <header data-testid={`order-history-header-${order.id}`}>
+            <h2 data-testid={`order-history-number-${order.id}`}>{order.orderNumber}</h2>
+            <p data-testid={`order-history-date-${order.id}`}>
+              {new Date(order.createdAt).toLocaleString("en-PH", { hour12: false })}
+            </p>
           </header>
 
-          <div className="order-history-meta">
-            <p>
+          <div className="order-history-meta" data-testid={`order-history-meta-${order.id}`}>
+            <p data-testid={`order-history-customer-${order.id}`}>
               <span>Customer</span>
               <span>{order.customerName}</span>
             </p>
-            <p>
+            <p data-testid={`order-history-type-${order.id}`}>
               <span>Type</span>
               <span>{order.orderType === "in" ? "Dine In" : "Takeaway"}</span>
             </p>
-            <p>
+            <p data-testid={`order-history-item-count-${order.id}`}>
               <span>Items</span>
               <span>{order.itemCount}</span>
             </p>
-            <p className="grand">
+            <p className="grand" data-testid={`order-history-total-${order.id}`}>
               <span>Total</span>
               <span>{formatCurrency(order.subtotal)}</span>
             </p>
           </div>
 
-          <div className="order-history-lines">
+          <div className="order-history-lines" data-testid={`order-history-lines-${order.id}`}>
             {order.items.map((item) => (
-              <p key={item.id}>
+              <p data-testid={`order-history-line-${order.id}-${item.id}`} key={item.id}>
                 <span>
                   {item.itemName} ({item.itemSize}) x{item.quantity}
                 </span>

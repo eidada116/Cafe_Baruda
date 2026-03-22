@@ -29,8 +29,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${sans.variable} ${serif.variable}`}>
+    <html data-testid="app-root" lang="en">
+      <body className={`${sans.variable} ${serif.variable}`} data-testid="app-body">
         <SiteHeader />
         {children}
         <SiteFooter />

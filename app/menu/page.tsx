@@ -11,9 +11,9 @@ export default async function MenuPage() {
   const { menuItems, categories } = await getCafeData();
 
   return (
-    <main className="section">
+    <main className="section" data-testid="page-menu">
       <div className="container">
-        <div className="section-head">
+        <div className="section-head" data-testid="menu-page-head">
           <h1>Menu</h1>
           <p>Filter by category, search by ingredient, and view current prices.</p>
         </div>

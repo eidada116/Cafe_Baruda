@@ -42,11 +42,12 @@ export function MenuCatalog({ menuItems, categories }: MenuCatalogProps) {
   }, [activeCategory, menuItems, query]);
 
   return (
-    <section className="menu-catalog">
-      <div className="menu-toolbar">
-        <div className="menu-filters">
+    <section className="menu-catalog" data-testid="menu-catalog">
+      <div className="menu-toolbar" data-testid="menu-toolbar">
+        <div className="menu-filters" data-testid="menu-category-filters" role="group" aria-label="Menu categories">
           <button
             className={`chip ${activeCategory === "all" ? "active" : ""}`}
+            data-testid="menu-filter-all"
             onClick={() => setActiveCategory("all")}
             type="button"
             id= "all-btn"
@@ -56,6 +57,7 @@ export function MenuCatalog({ menuItems, categories }: MenuCatalogProps) {
           {categories.map((category) => (
             <button
               className={`chip ${activeCategory === category.label ? "active" : ""}`}
+              data-testid={`menu-filter-${category.id}`}
               key={category.id}
               onClick={() => setActiveCategory(category.label)}
               type="button"
@@ -69,6 +71,9 @@ export function MenuCatalog({ menuItems, categories }: MenuCatalogProps) {
           <FaMagnifyingGlass aria-hidden />
           <input
             aria-label="Search menu items"
+            data-testid="menu-search-input"
+            id="menu-search-input"
+            name="menuSearch"
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Search by item, SKU or ingredient"
             type="search"
@@ -77,9 +82,9 @@ export function MenuCatalog({ menuItems, categories }: MenuCatalogProps) {
         </label>
       </div>
 
-      <div className="menu-grid">
+      <div className="menu-grid" data-testid="menu-results-grid">
         {filteredItems.map((item) => (
-          <article className="menu-card" key={item.id}>
+          <article className="menu-card" data-testid={`menu-catalog-item-${item.id}`} key={item.id}>
             <header className="menu-card-header">
               <h3>{item.name}</h3>
               <p>{formatCurrency(item.price)}</p>
@@ -87,9 +92,15 @@ export function MenuCatalog({ menuItems, categories }: MenuCatalogProps) {
             <p className="menu-meta">
               {item.category} - {item.size}
             </p>
-            <p className="menu-sku">{item.sku}</p>
+            <p className="menu-sku" data-testid={`menu-catalog-sku-${item.id}`}>
+              {item.sku}
+            </p>
             {item.ingredients.length > 0 ? (
-              <ul className="ingredient-tags" aria-label={`${item.name} ingredients`}>
+              <ul
+                className="ingredient-tags"
+                data-testid={`menu-catalog-ingredients-${item.id}`}
+                aria-label={`${item.name} ingredients`}
+              >
                 {item.ingredients.slice(0, 3).map((ingredient) => (
                   <li key={`${item.id}-${ingredient}`}>{ingredient}</li>
                 ))}
@@ -99,7 +110,9 @@ export function MenuCatalog({ menuItems, categories }: MenuCatalogProps) {
         ))}
       </div>
       {filteredItems.length === 0 ? (
-        <p className="empty-result">No menu items match your current filter.</p>
+        <p className="empty-result" data-testid="menu-empty-state">
+          No menu items match your current filter.
+        </p>
       ) : null}
     </section>
   );

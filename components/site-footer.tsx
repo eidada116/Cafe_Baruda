@@ -1,8 +1,8 @@
 export function SiteFooter() {
   return (
-    <footer className="site-footer">
+    <footer className="site-footer" data-testid="site-footer">
       <div className="container">
-        <p>Roast &amp; Bloom Cafe. Freshly brewed daily in central London.</p>
+        <p data-testid="site-footer-tagline">Roast &amp; Bloom Cafe. Freshly brewed daily in central London.</p>
       </div>
     </footer>
   );
