@@ -3,11 +3,11 @@ import Link from "next/link";
 import { FaMugHot } from "react-icons/fa6";
 
 const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/menu", label: "Menu" },
-  { href: "/pos", label: "POS" },
-  { href: "/#about", label: "About" },
-  { href: "/#contact", label: "Contact" }
+  { href: "/", label: "Home" , id: "home-btn"},
+  { href: "/menu", label: "Menu" , id: "menu-btn"},
+  { href: "/pos", label: "POS", id: "pos-btn" },
+  { href: "/#about", label: "About" , id: "about-btn"},
+  { href: "/#contact", label: "Contact", id: "contact-btn" }
 ];
 
 const navTestIds: Record<string, string> = {
@@ -29,7 +29,7 @@ export function SiteHeader() {
         <nav aria-label="Primary" data-testid="site-nav-primary">
           <ul className="nav-list" data-testid="site-nav-list">
             {navItems.map((item) => (
-              <li key={item.href} data-testid={navTestIds[item.href] ?? `nav-link-${item.href.replace(/[^\w-]/g, "")}`}>
+              <li key={item.href} id={item.id}>
                 <Link href={item.href}>{item.label}</Link>
               </li>
             ))}

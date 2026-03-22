@@ -9,12 +9,12 @@ async function testOne(){
         
         await driver.findElement(By.id("menu-btn")).click()
 
-        console.log("Test one successful")
+        console.log("test 1 passed")
         
 
     }
     finally{
-        //driver.quit();
+        driver.quit();
     }
 }
 
@@ -27,12 +27,12 @@ async function testTwo(){
         
         await driver.findElement(By.id("pos-btn")).click()
 
-        console.log("Test 2 Successful")
+        console.log("test 2 passed")
         
 
     }
     finally{
-        //driver.quit();
+        driver.quit();
     }
 }
 
@@ -45,12 +45,12 @@ async function testThree(){
         
         await driver.findElement(By.id("about-btn")).click()
 
-        console.log("Test Three Successful")
+        console.log("test 3 passed")
         
 
     }
     finally{
-        //driver.quit();
+        driver.quit();
     }
 }
 
@@ -68,7 +68,7 @@ async function testFour(){
 
     }
     finally{
-        //driver.quit();
+        driver.quit();
     }
 }
 
@@ -86,7 +86,7 @@ async function testFive(){
 
     }
     finally{
-        //driver.quit();
+        driver.quit();
     }
 }
 
@@ -104,7 +104,7 @@ async function testSix(){
 
     }
     finally{
-        //driver.quit();
+        driver.quit();
     }
 }
 
@@ -122,16 +122,15 @@ async function testSeven(){
 
     }
     finally{
-        //driver.quit();
+        driver.quit();
     }
 }
-
 
 async function testEight(){
     let driver = await new Builder().forBrowser("chrome").build()
     
     try{
-        console.log("navigate to pos page from home")
+        console.log("navigate to contact")
         await driver.get("http://localhost:3000/")
         
         await driver.findElement(By.className("btn-secondary")).click()
@@ -141,28 +140,238 @@ async function testEight(){
 
     }
     finally{
-        //driver.quit();
+        driver.quit();
     }
 }
+
 
 async function testNine(){
     let driver = await new Builder().forBrowser("chrome").build()
     
     try{
-        console.log("menu testing")
+        console.log("filter to cold drinks")
         await driver.get("http://localhost:3000/menu")
         
-        let text = await driver.findElement(By.text("Cold Drinks"))
-        await driver.findElement(By.className("btn-secondary")).click()
+        await driver.findElement(By.css('[data-testid="menu-filter-cold-drinks"]')).click()
 
-        console.log("test 8 passed")
+        console.log("test 9 passed")
         
 
     }
     finally{
-        //driver.quit();
+        driver.quit();
     }
 }
+
+
+async function testTen(){
+    let driver = await new Builder().forBrowser("chrome").build()
+    
+    try{
+        console.log("filter to hot drinks")
+        await driver.get("http://localhost:3000/menu")
+        
+        await driver.findElement(By.css('[data-testid="menu-filter-hot-drinks"]')).click()
+
+        console.log("test 10 passed")
+        
+
+    }
+    finally{
+        driver.quit();
+    }
+}
+
+async function testEleven(){
+    let driver = await new Builder().forBrowser("chrome").build()
+    
+    try{
+        console.log("filter to snacks")
+        await driver.get("http://localhost:3000/menu")
+        
+        await driver.findElement(By.css('[data-testid="menu-filter-snacks"]')).click()
+
+        console.log("test 11 passed")
+        
+
+    }
+    finally{
+        driver.quit();
+    }
+}
+
+async function testTwelve(){
+    let driver = await new Builder().forBrowser("chrome").build()
+    
+    try{
+        console.log("testing search")
+        await driver.get("http://localhost:3000/menu")
+        
+        await driver.findElement(By.css('[data-testid="menu-search-input"]')).sendKeys("Testing for Search")
+
+        console.log("test 12 passed")
+        
+
+    }
+    finally{
+        driver.quit();
+    }
+}
+
+
+async function testThirteen(){
+    let driver = await new Builder().forBrowser("chrome").build()
+    
+    try{
+        console.log("search validity")
+        await driver.get("http://localhost:3000/menu")
+        
+        await driver.findElement(By.css('[data-testid="menu-search-input"]')).sendKeys("Cold Coffee")
+
+        console.log("test 13 passed")
+        
+
+    }
+    finally{
+        driver.quit();
+    }
+}
+
+
+async function testFourteen(){
+    let driver = await new Builder().forBrowser("chrome").build()
+    
+    try{
+        console.log("search validity")
+        await driver.get("http://localhost:3000/menu")
+        
+        await driver.findElement(By.css('[data-testid="menu-search-input"]')).sendKeys("Raspberry Pie")
+
+        console.log("test 14 passed")
+        
+
+    }
+    finally{
+        driver.quit();
+    }
+}
+
+
+async function testFifteen(){
+    let driver = await new Builder().forBrowser("chrome").build()
+    
+    try{
+        console.log("search validity")
+        await driver.get("http://localhost:3000/menu")
+
+        await driver.findElement(By.css('[data-testid="menu-filter-cold-drinks"]')).click()
+        await driver.findElement(By.css('[data-testid="menu-search-input"]')).sendKeys("Cold Coffee")
+
+        console.log("test 15 passed")
+        
+
+    }
+    finally{
+        driver.quit();
+    }
+}
+
+async function testSixteen(){
+    let driver = await new Builder().forBrowser("chrome").build()
+    
+    try{
+        console.log("search validity")
+        await driver.get("http://localhost:3000/menu")
+
+        await driver.findElement(By.css('[data-testid="menu-filter-hot-drinks"]')).click()
+        await driver.findElement(By.css('[data-testid="menu-search-input"]')).sendKeys("Cappuccino")
+
+        console.log("test 16 passed")
+        
+
+    }
+    finally{
+        driver.quit();
+    }
+}
+
+async function testSeventeen(){
+    let driver = await new Builder().forBrowser("chrome").build()
+    
+    try{
+        console.log("search validity")
+        await driver.get("http://localhost:3000/menu")
+
+        await driver.findElement(By.css('[data-testid="menu-filter-snacks"]')).click()
+        await driver.findElement(By.css('[data-testid="menu-search-input"]')).sendKeys("Sandwich Ham")
+
+        console.log("test 17 passed")
+        
+
+    }
+    finally{
+        driver.quit();
+    }
+}
+
+async function testEighteen(){
+    let driver = await new Builder().forBrowser("chrome").build()
+    
+    try{
+        console.log("search validity")
+        await driver.get("http://localhost:3000/menu")
+
+        await driver.findElement(By.css('[data-testid="menu-filter-cold-drinks"]')).click()
+        await driver.findElement(By.css('[data-testid="menu-search-input"]')).sendKeys("NOT cold coffee")
+
+        console.log("test 18 passed")
+        
+
+    }
+    finally{
+        driver.quit();
+    }
+}
+
+async function testNineteen(){
+    let driver = await new Builder().forBrowser("chrome").build()
+    
+    try{
+        console.log("search validity")
+        await driver.get("http://localhost:3000/menu")
+
+        await driver.findElement(By.css('[data-testid="menu-filter-hot-drinks"]')).click()
+        await driver.findElement(By.css('[data-testid="menu-search-input"]')).sendKeys("NOT hot coffee")
+
+        console.log("test 19 passed")
+        
+
+    }
+    finally{
+        driver.quit();
+    }
+}
+
+
+async function testTwenty(){
+    let driver = await new Builder().forBrowser("chrome").build()
+    
+    try{
+        console.log("search validity")
+        await driver.get("http://localhost:3000/menu")
+
+        await driver.findElement(By.css('[data-testid="menu-filter-snacks"]')).click()
+        await driver.findElement(By.css('[data-testid="menu-search-input"]')).sendKeys("NOT a snack")
+
+        console.log("test 20 passed")
+        
+
+    }
+    finally{
+        driver.quit();
+    }
+}
+
 
 testOne()
 testTwo()
@@ -171,3 +380,15 @@ testFour()
 testFive()
 testSix()
 testSeven()
+testEight()
+testNine()
+testTen()
+testEleven()
+testTwelve()
+testThirteen()
+testFourteen()
+testFifteen()
+testSixteen()
+testSeventeen()
+testEighteen()
+testNineteen()
